@@ -3,7 +3,7 @@ default rel
 
 global  main
 
-; external functions
+; external functions from C standard library
 extern  printf
 extern  scanf
 
