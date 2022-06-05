@@ -13,8 +13,8 @@ section .data
     
     	i       dd 1 ;i for loop
 	;series variables
-    	res		dq 1.0
-    	num		dq 1.0
+    	res	dq 1.0
+    	num	dq 1.0
     	denom   dq 1.0
 
 section .bss
