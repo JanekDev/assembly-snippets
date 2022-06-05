@@ -9,7 +9,7 @@ extern 	scanf
 section .data
     	prompt	db 'k, x: ', 0
     	inpfor  db '%i %lf', 0
-    	resfor	db 'e^x = %f', 10, 0
+    	outfor	db 'e^x = %f', 10, 0
     
     	i       dd 1 ;i for loop
 		;series variables
@@ -70,7 +70,7 @@ section .text
 	calc_loop_finished:
 		;print the result
 		movlpd 	xmm0, [res]
-		lea    	rdi,  [resfor]
+		lea    	rdi,  [outfor]
 		mov    	al, 1
 		call 	printf wrt ..plt
 		
