@@ -28,7 +28,7 @@ section .text
 			
 		;print its address (only for demo)
 		lea 	rdi, [adrfor]
-		lea		rsi, input
+		lea		rsi, [input]
 		mov 	rax, 0
 		call 	printf wrt ..plt
 
@@ -47,7 +47,7 @@ section .text
 		
 		;print its address (only for demo)
 		lea 	rdi, [adrfor]
-		lea		rsi, output
+		lea		rsi, [output]
 		mov 	rax, 0
 		call 	printf wrt ..plt
 
