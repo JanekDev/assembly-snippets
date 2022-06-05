@@ -9,7 +9,7 @@ extern  scanf
 section .data
     	inpfor  db "%s", 0
     	outfor  db "%s", 0xA, 0
-    	intfor  db "address: %X", 0xA,0
+    	adrfor  db "address: %X", 0xA,0
 
 section .bss
     	input 	resb 1024
@@ -27,13 +27,13 @@ section .text
 		call    scanf wrt ..plt
 			
 		;print its address (only for demo)
-		lea 	rdi, [intfor]
-		lea	rsi, input
+		lea 	rdi, [adrfor]
+		lea		rsi, input
 		mov 	rax, 0
 		call 	printf wrt ..plt
 
 		;copy string
-			lea 	rsi, [input]
+		lea 	rsi, [input]
 		lea 	rdi, [output]
 		mov 	rcx, 1024
 		cld
@@ -41,17 +41,17 @@ section .text
 		
 		;print output
 		lea 	rdi, [outfor]
-		lea	rsi, [output]
+		lea		rsi, [output]
 		mov 	rax, 0
 		call 	printf wrt ..plt
 		
 		;print its address (only for demo)
-		lea 	rdi, [intfor]
-		lea	rsi, output
+		lea 	rdi, [adrfor]
+		lea		rsi, output
 		mov 	rax, 0
 		call 	printf wrt ..plt
 
 		;remove offset, return
-		add	rsp, 8
+		add		rsp, 8
 		sub 	rax, rax
 		ret
