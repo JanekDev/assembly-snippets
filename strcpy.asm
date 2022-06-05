@@ -3,24 +3,55 @@ default rel
 
 global  main
 
-; external functions from C standard library
 extern  printf
 extern  scanf
 
 section .data
-    formatter      db '%s'
-    newline        db '\n'
+    	inpfor  db "%s", 0
+    	outfor  db "%s", 0xA, 0
+    	intfor  db "address: %X", 0xA,0
 
 section .bss
-    input          resb 64
-    output         resb 64
+    	input 	resb 1024
+    	output 	resb 1024
 
 section .text
     main:
-        sub     rsp, 8
+		;stack offset    	
+		sub     rsp, 8
 
-        ; get input
-        lea    rdi, [formatter]
-        lea    rsi, [input]
-        mov    rax, 0
-        call   scanf wrt ..plt
+		;get input
+		lea     rdi, [inpfor]
+		lea 	rsi, [input]
+		mov 	rax, 0
+		call    scanf wrt ..plt
+			
+		;print its address (only for demo)
+		lea 	rdi, [intfor]
+		lea	rsi, input
+		mov 	rax, 0
+		call 	printf wrt ..plt
+
+		;copy string
+			lea 	rsi, [input]
+		lea 	rdi, [output]
+		mov 	rcx, 1024
+		cld
+		rep 	movsb
+		
+		;print output
+		lea 	rdi, [outfor]
+		lea	rsi, [output]
+		mov 	rax, 0
+		call 	printf wrt ..plt
+		
+		;print its address (only for demo)
+		lea 	rdi, [intfor]
+		lea	rsi, output
+		mov 	rax, 0
+		call 	printf wrt ..plt
+
+		;remove offset, return
+		add	rsp, 8
+		sub 	rax, rax
+		ret
